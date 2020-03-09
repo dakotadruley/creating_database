@@ -1,5 +1,8 @@
 const {
   isNumber,
+  isBoolean,
+  isString,
+  isArray,
   castToNumber,
   getCaster
 } = require('../lib/types.js');
@@ -15,7 +18,41 @@ describe('validator module', () => {
       expect(isNumber(true)).toBeFalsy();
     });
   });
+
+  //   isString test
+  describe('returns true if a string', () => {
+    it('tells if a value is a string', () => {
+      expect(isString('this')).toEqual(true);
+      expect(isString(5)).toEqual(false);
+      expect(isString([])).toBeFalsy();
+      expect(isString({})).toBeFalsy();
+      expect(isString(() => {})).toBeFalsy();
+    });
+  });
   
+  // isBoolean test
+  describe('returns true if a boolean', () => {
+    it('tells if a value is a boolean', () => {
+      expect(isBoolean(true)).toEqual(true);
+      expect(isBoolean(false)).toEqual(true);
+      expect(isBoolean('string')).toEqual(false);
+      expect(isBoolean(5)).toEqual(false);
+      expect(isBoolean([])).toBeFalsy();
+      expect(isBoolean({})).toBeFalsy();
+      expect(isBoolean(() => {})).toBeFalsy();
+    });
+  });
+
+  //   isArray test
+  describe('returns true if an array', () => {
+    it('tells if it is an array', (Array) => {
+      expect(isArray([1, 2, 3])).toBeTruthy();
+      Array.isArray({ example: 123 }).toBeFalsy();
+      Array.isArray('string').toBeFalsy();
+      Array.isArray(true).toBeFalsy();
+    });
+  });
+
   describe('casters', () => {
     it('can cast values to a number', () => {
       expect(castToNumber(3)).toEqual(3);
