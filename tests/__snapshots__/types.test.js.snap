@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`casters throws if value is not castable to string 1`] = `"Cannot cast >>5<< to String"`;
-
-exports[`casters throws if value is not castable to string 2`] = `"Cannot cast >>[object Object]<< to String"`;
-
-exports[`casters throws if value is not castable to string 3`] = `"Cannot cast >>undefined<< to "`;
-
 exports[`casting to bool throws if value is not castable to bool 1`] = `"Cannot cast >>undefined<< to undefined"`;
 
 exports[`casting to bool throws if value is not castable to bool 2`] = `"Cannot cast >>undefined<< to undefined"`;
