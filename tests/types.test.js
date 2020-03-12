@@ -8,10 +8,11 @@ const {
   castToNumber,
   castToString,
   castToBoolean,
-  getCaster
+  getCaster, 
+  castToArray
 } = require('../lib/types.js');
   
-describe('validator module', () => {
+describe('types module', () => {
   describe('basic validation', () => {
     it('properly tells if a value is a numbers', () => {
       expect(isNumber(3)).toBeTruthy();
@@ -23,59 +24,59 @@ describe('validator module', () => {
     });
   });
 
-  //   isString test
-  describe('returns true if a string', () => {
-    it('tells if a value is a string', () => {
-      expect(isString('this')).toEqual(true);
-      expect(isString(5)).toEqual(false);
-      expect(isString([])).toBeFalsy();
-      expect(isString({})).toBeFalsy();
-      expect(isString(() => {})).toBeFalsy();
-    });
+  //  isString test
+  // updated
+  it('tells if a value is a string', () => {
+    expect(isString('this')).toEqual(true);
+    expect(isString(5)).toEqual(false);
+    expect(isString([])).toBeFalsy();
+    expect(isString({})).toBeFalsy();
+    expect(isString(() => {})).toBeFalsy();
+    expect(isString(true)).toBeFalsy();
   });
   
   // isBoolean test
-  describe('returns true if a boolean', () => {
-    it('tells if a value is a boolean', () => {
-      expect(isBoolean(true)).toEqual(true);
-      expect(isBoolean(false)).toEqual(true);
-      expect(isBoolean('string')).toEqual(false);
-      expect(isBoolean(5)).toEqual(false);
-      expect(isBoolean([])).toBeFalsy();
-      expect(isBoolean({})).toBeFalsy();
-      expect(isBoolean(() => {})).toBeFalsy();
-    });
+  //  updated
+  it('tells if a value is a boolean', () => {
+    expect(isBoolean(true)).toEqual(true);
+    expect(isBoolean(false)).toEqual(true);
+    expect(isBoolean('string')).toEqual(false);
+    expect(isBoolean(5)).toEqual(false);
+    expect(isBoolean([])).toBeFalsy();
+    expect(isBoolean({})).toBeFalsy();
+    expect(isBoolean(() => {})).toBeFalsy();
   });
 
   //   isArray test
-  describe('returns true if an array', () => {
-    it('tells if it is an array', () => {
-      expect(isArray([1, 2, 3])).toBe(true);
-      expect(isArray({ example: 123 })).toBe(false);
-      expect(isArray('string')).toBeFalsy();
-      expect(isArray(true)).toBeFalsy();
-    });
+  //  updated
+  it('tells if it is an array', () => {
+    expect(isArray([1, 2, 3])).toBe(true);
+    expect(isArray({ example: 123 })).toBe(false);
+    expect(isArray('string')).toBeFalsy();
+    expect(isArray(true)).toBeFalsy();
+    expect(isArray(5)).toBeFalsy();
+    expect(isArray(() => {})).toBeFalsy();
   });
 
   //   isObject test
-  describe('returns true if an object', () => {
-    it('tells if it is an object', () => {
-      expect(isObject([1, 2, 3])).toEqual(false);
-      expect(isObject({ example: 123 })).toEqual(true);
-      expect(isObject('string')).toEqual(false);
-      expect(isObject(true)).toEqual(false);
-    });
+  //  updated
+  it('tells if it is an object', () => {
+    expect(isObject([1, 2, 3])).toEqual(false);
+    expect(isObject({ example: 123 })).toEqual(true);
+    expect(isObject('string')).toEqual(false);
+    expect(isObject(5)).toEqual(false);
+    expect(isObject(true)).toEqual(false);
+    expect(isObject(() => {})).toEqual(false);
   });
 
   //   isFunction test
-  describe('returns true if a function', () => {
-    it('tells if it is a function', () => {
-      expect(isFunction([1, 2, 3])).toEqual(false);
-      expect(isFunction({ example: 123 })).toEqual(false);
-      expect(isFunction('string')).toEqual(false);
-      expect(isFunction(true)).toEqual(false);
-      expect(isFunction(() => {})).toEqual(true);
-    });
+  //  updated
+  it('tells if it is a function', () => {
+    expect(isFunction([1, 2, 3])).toEqual(false);
+    expect(isFunction({ example: 123 })).toEqual(false);
+    expect(isFunction('string')).toEqual(false);
+    expect(isFunction(true)).toEqual(false);
+    expect(isFunction(() => {})).toEqual(true);
   });
 
   describe('casters', () => {
@@ -108,7 +109,6 @@ describe('casting to string', () => {
   });
   
   it('throws if value is not castable to string', () => {
-    expect(() => castToString([])).toThrowErrorMatchingSnapshot();
     expect(() => castToString({})).toThrowErrorMatchingSnapshot();
     expect(() => castToString(() => {})).toThrowErrorMatchingSnapshot();
   });
