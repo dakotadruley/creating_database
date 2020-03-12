@@ -9,7 +9,7 @@ const {
   castToString,
   castToBoolean,
   getCaster, 
-  castToArray
+  // castToArray
 } = require('../lib/types.js');
   
 describe('types module', () => {
